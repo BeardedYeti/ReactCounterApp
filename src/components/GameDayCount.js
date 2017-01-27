@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import '../stylesheets/ui.scss'
 
-export class GameDayCount extends React.Component {
+export class GameDayCount extends Component {
 	
 	percentDecimal(decimal) {
 		return ((decimal * 100) + '%')
