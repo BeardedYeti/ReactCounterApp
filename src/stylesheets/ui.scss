@@ -78,7 +78,7 @@ progress::-webkit-progress-value {
   }
 }
 
-div.ski-day-count {
+div.game-day-count {
   display: flex;
   flex-wrap: wrap;
   font-size: 3em;
@@ -127,7 +127,7 @@ div.ski-day-count {
 
 }
 
-div.ski-day-list {
+div.game-day-list {
 
   height: calc(100% - 13em);
   overflow-y: scroll;
