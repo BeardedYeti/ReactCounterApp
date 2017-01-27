@@ -1,14 +1,14 @@
 import React from 'react'
 import '../stylesheets/ui.scss'
 
-export const GameDayCount = React.createClass({
+export class GameDayCount extends React.Component {
 	
 	percentDecimal(decimal) {
 		return ((decimal * 100) + '%')
-	},
+	}
 	calcProgress(total, goal) {
 		return this.percentDecimal(total/goal)
-	},
+	}
 
 	render() {
 		return (
@@ -33,4 +33,4 @@ export const GameDayCount = React.createClass({
 			</div>
 		)
 	}
-})
+}
