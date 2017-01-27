@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react'
 import '../stylesheets/ui.scss'
 
 export class GameDayCount extends React.Component {
