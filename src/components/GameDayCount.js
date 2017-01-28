@@ -1,4 +1,3 @@
-import { Component } from 'react'
 import '../stylesheets/ui.scss'
 
 const percentDecimal = (decimal) => {
