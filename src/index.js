@@ -1,13 +1,32 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { GameDayCount } from './components/GameDayCount'
+import { GameDayList } from './components/GameDayList'
 
 window.React = React
 
 render(
-	<GameDayCount total={50}
-					coop={20}
-					livestream={30}
-					goal={100}/>,
+	<GameDayList days={
+		[
+			{
+				game: "Stardew Valley",
+				date: new Date("1/26/2017"),
+				coop: false,
+				livestream: false
+			},
+			{
+				game: "Overwatch",
+				date: new Date("1/27/2017"),
+				coop: false,
+				livestream: true
+			},
+			{
+				game: "Seven Days to Die",
+				date: new Date("1/28/2017"),
+				coop: true,
+				livestream: true
+			}
+
+		]
+	}/>,
 	document.getElementById('react-container')
 )

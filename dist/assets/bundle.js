@@ -52,13 +52,28 @@
 
 	var _reactDom = __webpack_require__(32);
 
-	var _GameDayCount = __webpack_require__(178);
+	var _GameDayList = __webpack_require__(178);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.React = _react2.default;
 
-	(0, _reactDom.render)(_react2.default.createElement(_GameDayCount.GameDayCount, null), document.getElementById('react-container'));
+	(0, _reactDom.render)(_react2.default.createElement(_GameDayList.GameDayList, { days: [{
+			game: "Stardew Valley",
+			date: new Date("1/26/2017"),
+			coop: false,
+			livestream: false
+		}, {
+			game: "Overwatch",
+			date: new Date("1/27/2017"),
+			coop: false,
+			livestream: true
+		}, {
+			game: "Seven Days to Die",
+			date: new Date("1/28/2017"),
+			coop: true,
+			livestream: true
+		}] }), document.getElementById('react-container'));
 
 /***/ },
 /* 1 */
@@ -21503,400 +21518,300 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.GameDayCount = undefined;
+	exports.GameDayList = undefined;
 
-	var _react = __webpack_require__(1);
+	var _group = __webpack_require__(179);
 
-	var _react2 = _interopRequireDefault(_react);
+	var _group2 = _interopRequireDefault(_group);
 
-	__webpack_require__(179);
+	var _gamepad = __webpack_require__(181);
+
+	var _gamepad2 = _interopRequireDefault(_gamepad);
+
+	var _twitch = __webpack_require__(182);
+
+	var _twitch2 = _interopRequireDefault(_twitch);
+
+	var _GameDayRow = __webpack_require__(183);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var GameDayCount = exports.GameDayCount = _react2.default.createClass({
-		displayName: 'GameDayCount',
-		render: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'game-day-count' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'total-days' },
-					_react2.default.createElement(
-						'span',
+	var GameDayList = exports.GameDayList = function GameDayList(_ref) {
+		var days = _ref.days;
+		return React.createElement(
+			'table',
+			null,
+			React.createElement(
+				'thead',
+				null,
+				React.createElement(
+					'tr',
+					null,
+					React.createElement(
+						'th',
 						null,
-						'5 days'
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'coop-days' },
-					_react2.default.createElement(
-						'span',
+						'Date'
+					),
+					React.createElement(
+						'th',
 						null,
-						'2 days'
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'livestream-days' },
-					_react2.default.createElement(
-						'span',
+						'Game'
+					),
+					React.createElement(
+						'th',
 						null,
-						'3 days'
+						'Coop'
+					),
+					React.createElement(
+						'th',
+						null,
+						'Livestream'
 					)
 				)
-			);
-		}
-	});
+			),
+			React.createElement(
+				'tbody',
+				null,
+				days.map(function (day, i) {
+					return React.createElement(_GameDayRow.GameDayRow, { key: i,
+						game: day.game,
+						date: day.date,
+						coop: day.coop,
+						livestream: day.livestream });
+				})
+			)
+		);
+	};
 
 /***/ },
 /* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
+	'use strict';
 
-	// load the styles
-	var content = __webpack_require__(180);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(182)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/sass-loader/index.js!./ui.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/sass-loader/index.js!./ui.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactIconBase = __webpack_require__(180);
+
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FaGroup = function FaGroup(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.3 20q-3.4 0.1-5.5 2.7h-2.8q-1.7 0-2.8-0.9t-1.2-2.4q0-7.4 2.6-7.4 0.1 0 0.9 0.5t2 0.8 2.5 0.5q1.4 0 2.7-0.5-0.1 0.8-0.1 1.4 0 2.9 1.7 5.3z m22.3 13.2q0 2.5-1.6 4t-4 1.4h-18.1q-2.6 0-4.1-1.4t-1.5-4q0-1.1 0.1-2.1t0.3-2.3 0.5-2.2 0.9-2.1 1.3-1.6 1.8-1.2 2.3-0.4q0.2 0 0.9 0.5t1.5 1 2.2 1 2.8 0.4 2.8-0.4 2.3-1 1.5-1 0.9-0.5q1.2 0 2.3 0.4t1.8 1.2 1.2 1.6 0.9 2.1 0.6 2.2 0.3 2.3 0.1 2.1z m-21.3-26.5q0 2.2-1.6 3.8t-3.7 1.5-3.8-1.5-1.5-3.8 1.5-3.7 3.8-1.6 3.7 1.6 1.6 3.7z m14.6 8q0 3.3-2.3 5.6t-5.7 2.4-5.6-2.4-2.3-5.6 2.3-5.7 5.6-2.3 5.7 2.3 2.3 5.7z m12 4.7q0 1.6-1.2 2.4t-2.9 0.9h-2.7q-2.2-2.6-5.5-2.7 1.6-2.4 1.6-5.3 0-0.6-0.1-1.4 1.4 0.5 2.8 0.5 1.2 0 2.5-0.5t2-0.8 0.9-0.5q2.6 0 2.6 7.4z m-2.7-12.7q0 2.2-1.5 3.8t-3.8 1.5-3.8-1.5-1.5-3.8 1.5-3.7 3.8-1.6 3.8 1.6 1.5 3.7z' })
+	        )
+	    );
+	};
+
+	exports.default = FaGroup;
+	module.exports = exports['default'];
 
 /***/ },
 /* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(181)();
-	// imports
+	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 
-	// module
-	exports.push([module.id, "nav.menu {\n  background-color: black;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: calc(100% - 1em);\n  font-size: 4em;\n  padding: .5em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around; }\n  nav.menu a {\n    color: #d3d5e3; }\n\ndiv.goal-progress {\n  width: 95%;\n  margin: 0 2.5%;\n  font-size: 2em;\n  position: absolute;\n  bottom: 5em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: verdana;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  text-shadow: 2px 2px 10px #d3d5e3; }\n  div.goal-progress progress {\n    -ms-flex-preferred-size: 66%;\n        flex-basis: 66%;\n    background-color: black;\n    height: .5em;\n    position: relative;\n    top: 17px; }\n  div.goal-progress input {\n    background: none;\n    border: none;\n    position: relative;\n    width: 2em;\n    font-size: 1em;\n    padding: 0;\n    left: 9px;\n    outline: none;\n    text-shadow: 2px 2px 10px #d3d5e3; }\n  div.goal-progress button {\n    font-size: .75em;\n    padding: .25em;\n    background-color: green;\n    color: white; }\n    div.goal-progress button:disabled {\n      background-color: lightgrey;\n      color: #bababa; }\n\nprogress::-webkit-progress-bar {\n  background-color: black; }\n\nprogress::-webkit-progress-value {\n  background-color: #8a2a2d; }\n\n@-moz-document url-prefix() {\n  progress {\n    display: none; } }\n\ndiv.game-day-count {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  font-size: 3em;\n  height: calc(100% - 3em); }\n  div.game-day-count > div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center; }\n    div.game-day-count > div.total-days {\n      -ms-flex-preferred-size: 100%;\n          flex-basis: 100%;\n      font-size: 2em; }\n      div.game-day-count > div.total-days span, div.game-day-count > div.total-days svg {\n        height: 200px; }\n    div.game-day-count > div:not(.total-days) {\n      -ms-flex-preferred-size: 50%;\n          flex-basis: 50%; }\n    div.game-day-count > div span, div.game-day-count > div svg {\n      background-color: white;\n      height: 100px;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center; }\n      div.game-day-count > div span:first-child, div.game-day-count > div svg:first-child {\n        border-radius: 25px 0 0 25px;\n        padding-left: 15px; }\n      div.game-day-count > div span:last-child, div.game-day-count > div svg:last-child {\n        border-radius: 0 25px 25px 0;\n        font-size: .5em;\n        padding-right: 15px; }\n\ndiv.game-day-list {\n  height: calc(100% - 13em);\n  overflow-y: scroll; }\n  div.game-day-list table {\n    width: 100%;\n    background-color: rgba(255, 255, 255, 0.9);\n    font-family: verdana, sans-serif;\n    font-size: 1.5em;\n    text-align: center; }\n    div.game-day-list table caption {\n      background-color: white;\n      background-color: rgba(255, 255, 255, 0.9);\n      color: #8f2e32; }\n    div.game-day-list table td {\n      padding: .2em; }\n    div.game-day-list table a {\n      margin: 15px; }\n\ndiv.show-errors {\n  width: 100%; }\n  div.show-errors div {\n    position: absolute;\n    width: 100%;\n    text-align: center;\n    top: 0;\n    background-color: red;\n    color: white;\n    font-family: verdana, sans-serif;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n    div.show-errors div svg {\n      font-size: 2em;\n      position: relative;\n      top: 9px;\n      right: 9px; }\n\nform.add-day {\n  font-family: Verdana, sans-serif;\n  width: 70%;\n  margin-left: 15%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  height: calc(100% - 12em); }\n  form.add-day > label,\n  form.add-day div {\n    margin: 1em 0; }\n  form.add-day label {\n    font-size: 1.5em;\n    text-shadow: 3px 3px 10px #d3d5e3;\n    height: 10px;\n    font-weight: bold; }\n  form.add-day input[type=\"text\"],\n  form.add-day input[type=\"date\"] {\n    font-size: 1.5em;\n    padding: .25em;\n    border-radius: .2em;\n    outline: none;\n    min-height: 36px; }\n  form.add-day input[type=\"checkbox\"] {\n    -webkit-transform: scale(2);\n            transform: scale(2);\n    margin: 0;\n    padding: 0;\n    margin-right: 2em; }\n  form.add-day div > label {\n    position: relative;\n    top: 2px; }\n  form.add-day .autocomplete {\n    position: relative; }\n    form.add-day .autocomplete input {\n      width: calc(100% - .75em); }\n    form.add-day .autocomplete span {\n      position: absolute;\n      top: 5px;\n      right: 10px;\n      font-size: 2em; }\n    form.add-day .autocomplete .suggestions {\n      position: absolute;\n      top: 2em;\n      left: 0;\n      width: auto;\n      height: auto;\n      max-height: 200px;\n      background-color: white;\n      overflow-y: scroll;\n      z-index: 3; }\n      form.add-day .autocomplete .suggestions p {\n        padding: 1em;\n        margin: 0; }\n        form.add-day .autocomplete .suggestions p:hover {\n          background-color: yellow; }\n      form.add-day .autocomplete .suggestions:empty {\n        display: none; }\n  form.add-day button {\n    margin: auto;\n    width: 100%;\n    font-size: 2em;\n    background-color: #8a2a2d;\n    font-weight: bold;\n    color: #d3d5e3;\n    padding: 5px; }\n", ""]);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	// exports
+	var _react = __webpack_require__(1);
 
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	var IconBase = function IconBase(_ref, _ref2) {
+	  var children = _ref.children;
+	  var color = _ref.color;
+	  var size = _ref.size;
+	  var style = _ref.style;
+
+	  var props = _objectWithoutProperties(_ref, ['children', 'color', 'size', 'style']);
+
+	  var _ref2$reactIconBase = _ref2.reactIconBase;
+	  var reactIconBase = _ref2$reactIconBase === undefined ? {} : _ref2$reactIconBase;
+
+	  var computedSize = size || reactIconBase.size || '1em';
+	  return _react2.default.createElement('svg', _extends({
+	    children: children,
+	    fill: 'currentColor',
+	    preserveAspectRatio: 'xMidYMid meet',
+	    height: computedSize,
+	    width: computedSize
+	  }, reactIconBase, props, {
+	    style: _extends({
+	      verticalAlign: 'middle',
+	      color: color || reactIconBase.color
+	    }, reactIconBase.style || {}, style)
+	  }));
+	};
+
+	IconBase.propTypes = {
+	  color: _react.PropTypes.string,
+	  size: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number]),
+	  style: _react.PropTypes.object
+	};
+
+	IconBase.contextTypes = {
+	  reactIconBase: _react.PropTypes.shape(IconBase.propTypes)
+	};
+
+	exports.default = IconBase;
+	module.exports = exports['default'];
 
 /***/ },
 /* 181 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
+	'use strict';
 
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactIconBase = __webpack_require__(180);
+
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FaGamepad = function FaGamepad(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.3 24v-2.7q0-0.3-0.2-0.4t-0.5-0.2h-4v-4q0-0.3-0.2-0.5t-0.4-0.2h-2.7q-0.3 0-0.5 0.2t-0.2 0.5v4h-3.9q-0.3 0-0.5 0.1t-0.2 0.5v2.7q0 0.3 0.2 0.5t0.5 0.2h3.9v3.9q0 0.3 0.2 0.5t0.5 0.2h2.7q0.3 0 0.4-0.2t0.2-0.5v-3.9h4q0.3 0 0.5-0.2t0.2-0.5z m11.9 1.3q0-1.1-0.7-1.9t-1.9-0.7-1.9 0.7-0.8 1.9 0.8 1.9 1.9 0.8 1.9-0.8 0.7-1.9z m5.4-5.3q0-1.1-0.8-1.9t-1.9-0.8-1.9 0.8-0.8 1.9 0.8 1.9 1.9 0.8 1.9-0.8 0.8-1.9z m5.3 2.7q0 4.4-3.1 7.5t-7.6 3.1q-4 0-7-2.7h-4.6q-3 2.7-7 2.7-4.4 0-7.5-3.1t-3.1-7.5 3.1-7.6 7.5-3.1h18.6q4.4 0 7.6 3.1t3.1 7.6z' })
+	        )
+	    );
 	};
 
+	exports.default = FaGamepad;
+	module.exports = exports['default'];
 
 /***/ },
 /* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
+	'use strict';
 
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+	var _react = __webpack_require__(1);
 
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
+	var _react2 = _interopRequireDefault(_react);
 
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
+	var _reactIconBase = __webpack_require__(180);
 
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
+	var FaTwitch = function FaTwitch(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 9.7v9.7h-3.2v-9.7h3.2z m8.9 0v9.7h-3.3v-9.7h3.3z m0 17l5.6-5.7v-17.8h-26.6v23.4h7.3v4.9l4.8-4.9h8.9z m8.9-26.7v22.6l-9.7 9.7h-7.3l-4.8 4.8h-4.9v-4.8h-8.9v-25.8l2.5-6.5h33.1z' })
+	        )
+	    );
+	};
 
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
+	exports.default = FaTwitch;
+	module.exports = exports['default'];
 
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
 
-	function createLinkElement(options) {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		insertStyleElement(options, linkElement);
-		return linkElement;
-	}
+	'use strict';
 
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.GameDayRow = undefined;
 
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement(options);
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
+	var _group = __webpack_require__(179);
 
-		update(obj);
+	var _group2 = _interopRequireDefault(_group);
 
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
+	var _gamepad = __webpack_require__(181);
 
-	var replaceText = (function () {
-		var textStore = [];
+	var _gamepad2 = _interopRequireDefault(_gamepad);
 
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
+	var _twitch = __webpack_require__(182);
 
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
+	var _twitch2 = _interopRequireDefault(_twitch);
 
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var sourceMap = obj.sourceMap;
-
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		var blob = new Blob([css], { type: "text/css" });
-
-		var oldSrc = linkElement.href;
-
-		linkElement.href = URL.createObjectURL(blob);
-
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
+	var GameDayRow = exports.GameDayRow = function GameDayRow(_ref) {
+		var game = _ref.game,
+		    date = _ref.date,
+		    coop = _ref.coop,
+		    livestream = _ref.livestream;
+		return React.createElement(
+			'tr',
+			null,
+			React.createElement(
+				'td',
+				null,
+				date.getMonth() + 1,
+				'/',
+				date.getDate(),
+				'/',
+				date.getFullYear()
+			),
+			React.createElement(
+				'td',
+				null,
+				game
+			),
+			React.createElement(
+				'td',
+				null,
+				coop ? React.createElement(_group2.default, null) : null
+			),
+			React.createElement(
+				'td',
+				null,
+				livestream ? React.createElement(_twitch2.default, null) : null
+			)
+		);
+	};
 
 /***/ }
 /******/ ]);
