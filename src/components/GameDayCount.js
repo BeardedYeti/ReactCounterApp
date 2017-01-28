@@ -9,23 +9,23 @@ const calcProgress = (total, goal) => {
 	return percentDecimal(total/goal)
 }
 
-export const GameDayCount = (props) => (
+export const GameDayCount = ({total, coop, livestream, goal}) => (
 	<div className="game-day-count">
 		<div className="total-days">
-			<span>{props.total}</span>
+			<span>{total}</span>
 			<span> days</span>
 		</div>
 		<div className="coop-days">
-			<span>{props.coop}</span>
+			<span>{coop}</span>
 			<span> days</span>
 		</div>
 		<div className="livestream-days">
-			<span>{props.livestream}</span>
+			<span>{livestream}</span>
 			<span> days</span>
 		</div>
 		<div>
 			<span>
-				{calcProgress(props.total, props.goal)}
+				{calcProgress(total, goal)}
 			</span>
 		</div>
 	</div>
