@@ -24,5 +24,13 @@ export const GameDayList = ({days}) => (
 )
 
 GameDayList.propTypes = {
-	days: PropTypes.array
+	days: function(props){
+		if(!Array.isArray(props.days)) {
+			return new Error("GameDayList should be an array")
+		} else if(!props.days.length) {
+			return new Error("GameDayList must have at least one record")
+		} else {
+			return null
+		}
+	}
 }
