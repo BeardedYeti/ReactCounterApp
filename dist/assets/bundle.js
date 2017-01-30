@@ -60,7 +60,7 @@
 
 	window.React = _react2.default;
 
-	(0, _reactDom.render)(_react2.default.createElement(_GameDayList.GameDayList, { days: 'lots of days' }), document.getElementById('react-container'));
+	(0, _reactDom.render)(_react2.default.createElement(_GameDayList.GameDayList, { days: [] }), document.getElementById('react-container'));
 
 /***/ },
 /* 1 */
