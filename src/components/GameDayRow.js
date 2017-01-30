@@ -1,6 +1,7 @@
 import FaGroup from 'react-icons/lib/fa/group'
 import FaGamepad from 'react-icons/lib/fa/gamepad'
 import FaTwitch from 'react-icons/lib/fa/twitch'
+import { PropTypes } from 'react'
 
 export const GameDayRow = ({game, date, coop, livestream}) => (
 	<tr>
@@ -19,3 +20,10 @@ export const GameDayRow = ({game, date, coop, livestream}) => (
 	</tr>
 
 )
+
+GameDayRow.propTypes = {
+	game: PropTypes.string.isRequired,
+	date: PropTypes.instanceOf(Date).isRequired,
+	coop: PropTypes.bool,
+	livestream: PropTypes.bool
+}
