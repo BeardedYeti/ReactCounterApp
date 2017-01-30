@@ -1,4 +1,6 @@
 import { createClass } from 'react'
+import { GameDayList } from './GameDayList'
+import { GameDayCount } from './GameDayCount'
 
 export const App = createClass({
 	getInitialState() {
@@ -25,10 +27,17 @@ export const App = createClass({
 			]
 		}
 	},
+	countDays(filter) {
+		const { allGameDays } = this.state
+		return allGameDays.filter((day) => (filter) ? day[filter] : day).length
+	},
 	render() {
 		return(
 			<div className="app">
-				{this.state.allGameDays[0]["game"]}
+				<GameDayList days={this.state.allGameDays}/>
+				<GameDayCount total={this.countDays()}
+							  coop={this.countDays("coop")}
+							  livestream={this.countDays("livestream")}/>
 
 			</div>
 		)

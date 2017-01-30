@@ -52,15 +52,16 @@
 
 	var _reactDom = __webpack_require__(32);
 
-	var _GameDayList = __webpack_require__(178);
+	var _App = __webpack_require__(178);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	window.React = _react2.default;
+	//import { GameDayList } from './components/GameDayList'
 	//import { GameDayCount } from './components/GameDayCount'
 
-	window.React = _react2.default;
 
-	(0, _reactDom.render)(_react2.default.createElement(_GameDayList.GameDayList, { days: [] }), document.getElementById('react-container'));
+	(0, _reactDom.render)(_react2.default.createElement(_App.App, null), document.getElementById('react-container'));
 
 /***/ },
 /* 1 */
@@ -21505,23 +21506,82 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.App = undefined;
+
+	var _react = __webpack_require__(1);
+
+	var _GameDayList = __webpack_require__(179);
+
+	var _GameDayCount = __webpack_require__(185);
+
+	var App = exports.App = (0, _react.createClass)({
+		getInitialState: function getInitialState() {
+			return {
+				allGameDays: [{
+					game: "Stardew Valley",
+					date: new Date("1/26/2017"),
+					coop: false,
+					livestream: false
+				}, {
+					game: "Overwatch",
+					date: new Date("1/27/2017"),
+					coop: false,
+					livestream: true
+				}, {
+					game: "Seven Days to Die",
+					date: new Date("1/28/2017"),
+					coop: true,
+					livestream: true
+				}]
+			};
+		},
+		countDays: function countDays(filter) {
+			return this.state.allGameDays.filter(function (day) {
+				if (filter) {
+					return day[filter];
+				} else {
+					return day;
+				}
+			}).length;
+		},
+		render: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'app' },
+				React.createElement(_GameDayList.GameDayList, { days: this.state.allGameDays }),
+				React.createElement(_GameDayCount.GameDayCount, { total: this.countDays(),
+					coop: this.countDays("coop"),
+					livestream: this.countDays("livestream") })
+			);
+		}
+	});
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	exports.GameDayList = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _group = __webpack_require__(179);
+	var _group = __webpack_require__(180);
 
 	var _group2 = _interopRequireDefault(_group);
 
-	var _gamepad = __webpack_require__(181);
+	var _gamepad = __webpack_require__(182);
 
 	var _gamepad2 = _interopRequireDefault(_gamepad);
 
-	var _twitch = __webpack_require__(182);
+	var _twitch = __webpack_require__(183);
 
 	var _twitch2 = _interopRequireDefault(_twitch);
 
-	var _GameDayRow = __webpack_require__(183);
+	var _GameDayRow = __webpack_require__(184);
 
 	var _react = __webpack_require__(1);
 
@@ -21584,7 +21644,7 @@
 	};
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21599,7 +21659,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactIconBase = __webpack_require__(180);
+	var _reactIconBase = __webpack_require__(181);
 
 	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
@@ -21621,7 +21681,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21680,7 +21740,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21695,7 +21755,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactIconBase = __webpack_require__(180);
+	var _reactIconBase = __webpack_require__(181);
 
 	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
@@ -21717,7 +21777,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21732,7 +21792,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactIconBase = __webpack_require__(180);
+	var _reactIconBase = __webpack_require__(181);
 
 	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
@@ -21754,7 +21814,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21764,15 +21824,15 @@
 	});
 	exports.GameDayRow = undefined;
 
-	var _group = __webpack_require__(179);
+	var _group = __webpack_require__(180);
 
 	var _group2 = _interopRequireDefault(_group);
 
-	var _gamepad = __webpack_require__(181);
+	var _gamepad = __webpack_require__(182);
 
 	var _gamepad2 = _interopRequireDefault(_gamepad);
 
-	var _twitch = __webpack_require__(182);
+	var _twitch = __webpack_require__(183);
 
 	var _twitch2 = _interopRequireDefault(_twitch);
 
@@ -21821,6 +21881,467 @@
 		coop: _react.PropTypes.bool,
 		livestream: _react.PropTypes.bool
 	};
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.GameDayCount = undefined;
+
+	__webpack_require__(186);
+
+	var _group = __webpack_require__(180);
+
+	var _group2 = _interopRequireDefault(_group);
+
+	var _gamepad = __webpack_require__(182);
+
+	var _gamepad2 = _interopRequireDefault(_gamepad);
+
+	var _twitch = __webpack_require__(183);
+
+	var _twitch2 = _interopRequireDefault(_twitch);
+
+	var _react = __webpack_require__(1);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var percentDecimal = function percentDecimal(decimal) {
+		return decimal * 100 + '%';
+	};
+
+	var calcProgress = function calcProgress(total, goal) {
+		return percentDecimal(total / goal);
+	};
+
+	var GameDayCount = exports.GameDayCount = function GameDayCount(_ref) {
+		var _ref$total = _ref.total,
+		    total = _ref$total === undefined ? 70 : _ref$total,
+		    _ref$coop = _ref.coop,
+		    coop = _ref$coop === undefined ? 20 : _ref$coop,
+		    _ref$livestream = _ref.livestream,
+		    livestream = _ref$livestream === undefined ? 10 : _ref$livestream,
+		    _ref$goal = _ref.goal,
+		    goal = _ref$goal === undefined ? 100 : _ref$goal;
+		return React.createElement(
+			'div',
+			{ className: 'game-day-count' },
+			React.createElement(
+				'div',
+				{ className: 'total-days' },
+				React.createElement(
+					'span',
+					null,
+					total
+				),
+				React.createElement(_gamepad2.default, null),
+				React.createElement(
+					'span',
+					null,
+					' days'
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'coop-days' },
+				React.createElement(
+					'span',
+					null,
+					coop
+				),
+				React.createElement(_group2.default, null),
+				React.createElement(
+					'span',
+					null,
+					' days'
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'livestream-days' },
+				React.createElement(
+					'span',
+					null,
+					livestream
+				),
+				React.createElement(_twitch2.default, null),
+				React.createElement(
+					'span',
+					null,
+					' days'
+				)
+			),
+			React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'span',
+					null,
+					calcProgress(total, goal)
+				)
+			)
+		);
+	};
+
+	GameDayCount.propTypes = {
+		total: _react.PropTypes.number,
+		coop: _react.PropTypes.number,
+		livestream: _react.PropTypes.number,
+		goal: _react.PropTypes.number
+	};
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(187);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(189)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/sass-loader/index.js!./ui.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/autoprefixer-loader/index.js!./../../node_modules/sass-loader/index.js!./ui.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(188)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "nav.menu {\n  background-color: black;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: calc(100% - 1em);\n  font-size: 4em;\n  padding: .5em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around; }\n  nav.menu a {\n    color: #d3d5e3; }\n\ndiv.goal-progress {\n  width: 95%;\n  margin: 0 2.5%;\n  font-size: 2em;\n  position: absolute;\n  bottom: 5em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: verdana;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  text-shadow: 2px 2px 10px #d3d5e3; }\n  div.goal-progress progress {\n    -ms-flex-preferred-size: 66%;\n        flex-basis: 66%;\n    background-color: black;\n    height: .5em;\n    position: relative;\n    top: 17px; }\n  div.goal-progress input {\n    background: none;\n    border: none;\n    position: relative;\n    width: 2em;\n    font-size: 1em;\n    padding: 0;\n    left: 9px;\n    outline: none;\n    text-shadow: 2px 2px 10px #d3d5e3; }\n  div.goal-progress button {\n    font-size: .75em;\n    padding: .25em;\n    background-color: green;\n    color: white; }\n    div.goal-progress button:disabled {\n      background-color: lightgrey;\n      color: #bababa; }\n\nprogress::-webkit-progress-bar {\n  background-color: black; }\n\nprogress::-webkit-progress-value {\n  background-color: #8a2a2d; }\n\n@-moz-document url-prefix() {\n  progress {\n    display: none; } }\n\ndiv.game-day-count {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  font-size: 3em;\n  height: calc(100% - 3em); }\n  div.game-day-count > div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center; }\n    div.game-day-count > div.total-days {\n      -ms-flex-preferred-size: 100%;\n          flex-basis: 100%;\n      font-size: 2em; }\n      div.game-day-count > div.total-days span, div.game-day-count > div.total-days svg {\n        height: 200px; }\n    div.game-day-count > div:not(.total-days) {\n      -ms-flex-preferred-size: 50%;\n          flex-basis: 50%; }\n    div.game-day-count > div span, div.game-day-count > div svg {\n      background-color: white;\n      height: 100px;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center; }\n      div.game-day-count > div span:first-child, div.game-day-count > div svg:first-child {\n        border-radius: 25px 0 0 25px;\n        padding-left: 15px; }\n      div.game-day-count > div span:last-child, div.game-day-count > div svg:last-child {\n        border-radius: 0 25px 25px 0;\n        font-size: .5em;\n        padding-right: 15px; }\n\ndiv.game-day-list {\n  height: calc(100% - 13em);\n  overflow-y: scroll; }\n  div.game-day-list table {\n    width: 100%;\n    background-color: rgba(255, 255, 255, 0.9);\n    font-family: verdana, sans-serif;\n    font-size: 1.5em;\n    text-align: center; }\n    div.game-day-list table caption {\n      background-color: white;\n      background-color: rgba(255, 255, 255, 0.9);\n      color: #8f2e32; }\n    div.game-day-list table td {\n      padding: .2em; }\n    div.game-day-list table a {\n      margin: 15px; }\n\ndiv.show-errors {\n  width: 100%; }\n  div.show-errors div {\n    position: absolute;\n    width: 100%;\n    text-align: center;\n    top: 0;\n    background-color: red;\n    color: white;\n    font-family: verdana, sans-serif;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n    div.show-errors div svg {\n      font-size: 2em;\n      position: relative;\n      top: 9px;\n      right: 9px; }\n\nform.add-day {\n  font-family: Verdana, sans-serif;\n  width: 70%;\n  margin-left: 15%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  height: calc(100% - 12em); }\n  form.add-day > label,\n  form.add-day div {\n    margin: 1em 0; }\n  form.add-day label {\n    font-size: 1.5em;\n    text-shadow: 3px 3px 10px #d3d5e3;\n    height: 10px;\n    font-weight: bold; }\n  form.add-day input[type=\"text\"],\n  form.add-day input[type=\"date\"] {\n    font-size: 1.5em;\n    padding: .25em;\n    border-radius: .2em;\n    outline: none;\n    min-height: 36px; }\n  form.add-day input[type=\"checkbox\"] {\n    -webkit-transform: scale(2);\n            transform: scale(2);\n    margin: 0;\n    padding: 0;\n    margin-right: 2em; }\n  form.add-day div > label {\n    position: relative;\n    top: 2px; }\n  form.add-day .autocomplete {\n    position: relative; }\n    form.add-day .autocomplete input {\n      width: calc(100% - .75em); }\n    form.add-day .autocomplete span {\n      position: absolute;\n      top: 5px;\n      right: 10px;\n      font-size: 2em; }\n    form.add-day .autocomplete .suggestions {\n      position: absolute;\n      top: 2em;\n      left: 0;\n      width: auto;\n      height: auto;\n      max-height: 200px;\n      background-color: white;\n      overflow-y: scroll;\n      z-index: 3; }\n      form.add-day .autocomplete .suggestions p {\n        padding: 1em;\n        margin: 0; }\n        form.add-day .autocomplete .suggestions p:hover {\n          background-color: yellow; }\n      form.add-day .autocomplete .suggestions:empty {\n        display: none; }\n  form.add-day button {\n    margin: auto;\n    width: 100%;\n    font-size: 2em;\n    background-color: #8a2a2d;\n    font-weight: bold;\n    color: #d3d5e3;\n    padding: 5px; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 188 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
 
 /***/ }
 /******/ ]);
