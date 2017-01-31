@@ -11,6 +11,8 @@ window.React = React
 render(
 	<Router history={hashHistory}>
 		<Route path="/" component={App}/>
+		<Route path="list" component={App}/>
+		<Route path="add" component={App}/>
 		<Route path="*" component={Error404}/>
 	</Router>,
 	document.getElementById('react-container')
