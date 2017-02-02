@@ -44,7 +44,8 @@ export class App extends Component{
 							  livestream={this.countDays("livestream")}/> :
 				(this.props.location.pathname === "/add") ?
 					<AddDayForm /> :
-					<GameDayList days={this.state.allGameDays}/>
+					<GameDayList days={this.state.allGameDays}
+								 filter={this.props.params.filter}/>
 			}
 			</div>
 		)
