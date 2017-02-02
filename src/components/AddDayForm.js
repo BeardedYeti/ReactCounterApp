@@ -36,7 +36,7 @@ export class AddDayForm extends Component {
 
 AddDayForm.defaultProps = {
 	game: "Overwatch",
-	date: "2017-01-1",
+	date: "2017-01-01",
 	coop: true,
 	livestream: false
 }
