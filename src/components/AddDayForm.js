@@ -1,13 +1,19 @@
-import { PropTypes, Component } from 'react'
+import { PropTypes } from 'react'
 
-export const AddDayForm = ({ game, date, coop, livestream }) => {
+export const AddDayForm = ({ game, date, coop, livestream, onNewDay }) => {
 	
 	const submit = (e) => {
 		e.preventDefault()
-		console.log('game', _game.value)
-		console.log('date', _date.value)
-		console.log('coop', _coop.checked)
-		console.log('livestream', _livestream.checked)
+		onNewDay({
+			game: _game.value,
+			date: _date.value,
+			coop: _coop.checked,
+			livestream: _livestream.checked
+		})
+		_game.value = ''
+		_date.value = ''
+		_coop.checked = false
+		_livestream.checked = false
 	}
 
 	let _game, _date, _coop, _livestream

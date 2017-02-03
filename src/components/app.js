@@ -10,25 +10,22 @@ export class App extends Component{
 		this.state = {
 			allGameDays: [
 				{
-					game: "Stardew Valley",
-					date: new Date("1/26/2017"),
-					coop: false,
-					livestream: false
-				},
-				{
 					game: "Overwatch",
-					date: new Date("1/27/2017"),
-					coop: false,
-					livestream: true
-				},
-				{
-					game: "Seven Days to Die",
-					date: new Date("1/28/2017"),
+					date: "2016-01-01",
 					coop: true,
-					livestream: true
+					livestream: false
 				}
 			]
 		}
+		this.addDay = this.addDay.bind(this)
+	}
+	addDay(newDay) {
+		this.setState({
+			allGameDays: [
+				...this.state.allGameDays,
+				newDay
+			]
+		})
 	}
 	countDays(filter) {
 		const { allGameDays } = this.state
@@ -43,7 +40,7 @@ export class App extends Component{
 							  coop={this.countDays("coop")}
 							  livestream={this.countDays("livestream")}/> :
 				(this.props.location.pathname === "/add") ?
-					<AddDayForm /> :
+					<AddDayForm onNewDay={this.addDay}/> :
 					<GameDayList days={this.state.allGameDays}
 								 filter={this.props.params.filter}/>
 			}

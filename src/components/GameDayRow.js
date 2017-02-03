@@ -6,7 +6,7 @@ import { PropTypes } from 'react'
 export const GameDayRow = ({game, date, coop, livestream}) => (
 	<tr>
 		<td>
-			{date.getMonth()+1}/{date.getDate()}/{date.getFullYear()}
+			{date}
 		</td>
 		<td>
 			{game}
@@ -23,7 +23,7 @@ export const GameDayRow = ({game, date, coop, livestream}) => (
 
 GameDayRow.propTypes = {
 	game: PropTypes.string.isRequired,
-	date: PropTypes.instanceOf(Date).isRequired,
+	date: PropTypes.string.isRequired,
 	coop: PropTypes.bool,
 	livestream: PropTypes.bool
 }
