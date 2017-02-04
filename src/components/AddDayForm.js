@@ -1,4 +1,82 @@
-import { PropTypes } from 'react'
+import { PropTypes, Component } from 'react'
+
+const popularGames = [
+	"Overwatch",
+	"Stardew Valley",
+	"Minecraft",
+	"DOTA 2",
+	"League of Legends",
+	"Kerbal Space Program",
+	"Sid Meier's Civilization VI",
+	"Battlefield 1",
+	"World of Warcraft",
+	"Hearthstone",
+	"Counter Strike: Global Offensive",
+	"Rainbow Six Siege",
+	"World of Tanks",
+	"Destiny",
+	"Heroes of the Storm",
+	"Dark Souls III",
+	"Starcraft II",
+	"Fallout 4",
+	"Pokemon Sun and Moon",
+	"ARK",
+	"Smite",
+	"Call of Duty Infinite Warfare",
+	"Rocket League",
+	"Madden 17",
+	"Mass Effect",
+	"Mass Effect 2",
+	"Mass Effect 3",
+	"Red Dead Redemption",
+	"Super Smash Bros for Wii U",
+	"Mario Kart 8",
+	"Super Mario Maker",
+	"Splatoon",
+	"The Legend of Zelda: Ocarina of Time",
+	"The Sims 4",
+	"The Witcher 3",
+	"Crusader Kings II",
+	"Guild Wars 2",
+	"The Witness",
+	"Rust",
+	"Age of Empires II",
+	"The Elder Scrolls V Skyrim",
+	"7 Days to Die",
+	"The Last of Us",
+	"Total War Warhammer",
+	"Elite Dangerous",
+	"The Darket Dungeon",
+	"The Last Guardian",
+	"Payday 2",
+	"Grand Theft Auto V"
+]
+
+class Autocomplete extends Component {
+	get value() {
+		return this.refs.inputGames.value
+	}
+
+	set value(inputValue) {
+		this.refs.inputGames.value = inputValue
+	}
+
+	render () {
+		return (
+			<div>
+				<input ref="inputGames" 
+					   type="text" 
+					   list="popular-games" />
+				<datalist id="popular-games">
+					{this.props.options.map(
+						(opt, i) => 
+						<option key={i}>{opt}</option>
+					)}
+				</datalist>
+			</div>
+		)
+	}
+}
 
 export const AddDayForm = ({ game, date, coop, livestream, onNewDay }) => {
 	
@@ -21,11 +99,8 @@ export const AddDayForm = ({ game, date, coop, livestream, onNewDay }) => {
 	return (
 		<form onSubmit={submit} className="add-day-form">
 			<label htmlFor="game">Game:</label>
-			<input id="game" 
-				   type="text" 
-				   required 
-				   defaultValue={game}
-				   ref={input => _game = input}/>
+			<Autocomplete options={popularGames}
+				   		  ref={input => _game = input}/>
 			<label htmlFor="date">Date:</label>
 			<input id="date" 
 			       type="date" 
@@ -49,7 +124,6 @@ export const AddDayForm = ({ game, date, coop, livestream, onNewDay }) => {
 			<button>Add</button>
 		</form>
 	)
-
 }
 
 AddDayForm.defaultProps = {
