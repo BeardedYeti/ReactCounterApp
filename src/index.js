@@ -7,49 +7,21 @@ import { Error404 } from './components/Error404'
 import { Router, Route, hashHistory } from 'react-router'
 import constants from './constants'
 import storeFactory from './store/store.js'
+import { addDay, removeDay, setGoal } from './actions/days'
 
-const initialState = (localStorage['redux-store']) ?
-	JSON.parse(localStorage['redux-store']) :
-	{}
+const store = storeFactory()
 
-const saveState = () => {
-	const state = JSON.stringify(store.getState())
-	localStorage['redux-store'] = state
-}
+store.dispatch(
+	addDay("Minecraft", "2017-03-06")
+)
 
-const store = storeFactory(initialState)
+store.dispatch(
+	removeDay("2017-03-06")
+)
 
-store.subscribe(saveState)
-
-store.dispatch({
-	type: constants.ADD_DAY,
-	payload: {
-		"game": "Minecraft",
-		"date": "2017-03-06",
-		"coop": true,
-		"livestream": true
-	}
-})
-
-store.dispatch({
-	type: constants.ADD_DAY,
-	payload: {
-		"game": "World of Warcraft",
-		"date": "2017-03-07",
-		"coop": true,
-		"livestream": true
-	}
-})
-
-store.dispatch({
-	type: constants.ADD_DAY,
-	payload: {
-		"game": "For Honor",
-		"date": "2017-03-08",
-		"coop": true,
-		"livestream": true
-	}
-})
+store.dispatch(
+	setGoal(55)
+)
 
 window.React = React
 
