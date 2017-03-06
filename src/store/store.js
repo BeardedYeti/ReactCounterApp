@@ -1,32 +1,24 @@
-import constants from '../constants'
-import { allGameDays } from '../reducers/reducers'
+import { createStore } from 'redux';
+import constants from '../constants';
+import appReducer from '../reducers/reducers';
+import initialState from '../initialState.json';
 
-const state = [
-	{
-		"game": "Overwatch",
-		"date": "2017-03-04",
-		"coop": false,
-		"livestream": true
-	},
-	{
-		"game": "Wolfenstein Enemy Territory",
-		"date": "2017-03-05",
-		"coop": false,
+// Store App State
+const store = createStore(appReducer, initialState);
+
+console.log('initial state', store.getState());
+
+// Dispatch the Store
+store.dispatch({
+	type: constants.ADD_DAY,
+	payload: {
+		"game": "Minecraft",
+		"date": "2017-03-06",
+		"coop": true,
 		"livestream": true
 	}
-]
- 
-const action = {
-	type: constants.REMOVE_DAY,
-	payload: "2017-03-04"
-}
+})
 
-const nextState = allGameDays(state, action)
+console.log('current state', store.getState());
 
-console.log(`
 
-	initial state: ${JSON.stringify(state)}
-	action: ${JSON.stringify(action)}
-	new state: ${JSON.stringify(nextState)}
-
-`)
