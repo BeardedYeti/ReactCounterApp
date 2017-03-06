@@ -1,24 +1,29 @@
-import { createStore } from 'redux';
-import constants from '../constants';
-import appReducer from '../reducers/reducers';
-import initialState from '../initialState.json';
+import constants from '../constants'
+import appReducer from '../reducers/reducers'
+import { createStore, applyMiddleware } from 'redux'
 
-// Store App State
-const store = createStore(appReducer, initialState);
+//Middleware
+const consoleMessages = store => next => action => {
+	let result
+	console.groupCollapsed(`dispatching action => ${action.type}`)
+	console.log('Game Days', store.getState().allGameDays.length)
+	result = next(action)
+	let { allGameDays, goal, errors, gameNames } = store.getState() 
+	console.log(`
 
-console.log('initial state', store.getState());
+		game days: ${allGameDays.length}
+		goal: ${goal}
+		fetching: ${gameNames.fetching}
+		suggestions: ${gameNames.suggestions}
+		errors: ${errors.length}
 
-// Dispatch the Store
-store.dispatch({
-	type: constants.ADD_DAY,
-	payload: {
-		"game": "Minecraft",
-		"date": "2017-03-06",
-		"coop": true,
-		"livestream": true
-	}
-})
+	`)
 
-console.log('current state', store.getState());
+	console.groupEnd()
+	return result
+}
 
-
+// Creates A Store
+export default (initialState={}) => {
+	return applyMiddleware(consoleMessages)(createStore)(appReducer, initialState)
+}
