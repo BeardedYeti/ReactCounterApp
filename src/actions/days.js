@@ -1,4 +1,5 @@
 import constants from '../constants'
+import fetch from 'isomorphic-fetch'
 
 // Add day app logic here...
 
@@ -66,5 +67,27 @@ export const randomGoals = () => (dispatch, getState) => {
 			})
 		}, 1500)
 	}
-	
+}
+
+// Suggest Names
+export const suggestGameNames = value => dispatch => {
+	dispatch({
+		type: constants.FETCH_GAME_NAMES
+	})
+	fetch('http://localhost:3333/games/' + value)
+		.then(response => response.json())
+		.then(suggestions => {
+			dispatch({
+				type: constants.CHANGE_SUGGESTIONS,
+				payload: suggestions
+			})
+		})
+		.catch(error => {
+			dispatch(
+				addError(error.message)
+			)
+			dispatch({
+				type: constants.CANCEL_FETCHING
+			})
+		})
 }

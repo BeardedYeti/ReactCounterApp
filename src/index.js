@@ -7,13 +7,12 @@ import { Error404 } from './components/Error404'
 import { Router, Route, hashHistory } from 'react-router'
 import constants from './constants'
 import storeFactory from './store/store.js'
-import expect from 'expect'
-import { randomGoals } from './actions/days'
+import { suggestGameNames } from './actions/days'
 
 const store = storeFactory()
 
 store.dispatch(
-	randomGoals()
+	suggestGameNames("d")
 )
 
 window.React = React
