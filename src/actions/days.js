@@ -50,3 +50,21 @@ export const clearSuggestions = () =>
 	({
 		type: constants.CLEAR_SUGGESTIONS
 	})
+
+/* Thunks */
+
+// Random Goals
+export const randomGoals = () => (dispatch, getState) => {
+	if (!getState().gameNames.fetching) {
+		dispatch({
+			type: constants.FETCH_GAME_NAMES
+		})
+
+		setTimeout(() => {
+			dispatch({
+				type: constants.CANCEL_FETCHING
+			})
+		}, 1500)
+	}
+	
+}

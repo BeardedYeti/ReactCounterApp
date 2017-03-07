@@ -7,20 +7,13 @@ import { Error404 } from './components/Error404'
 import { Router, Route, hashHistory } from 'react-router'
 import constants from './constants'
 import storeFactory from './store/store.js'
-import { addDay, removeDay, setGoal } from './actions/days'
+import expect from 'expect'
+import { randomGoals } from './actions/days'
 
 const store = storeFactory()
 
 store.dispatch(
-	addDay("Minecraft", "2017-03-06")
-)
-
-store.dispatch(
-	removeDay("2017-03-06")
-)
-
-store.dispatch(
-	setGoal(55)
+	randomGoals()
 )
 
 window.React = React

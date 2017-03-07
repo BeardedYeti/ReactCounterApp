@@ -47,7 +47,7 @@ export const fetching = (state=false, action) => {
 	switch(action.type) {
 		case constants.FETCH_GAME_NAMES :
 			return true
-		case constants.CANCEL_FETCHLING :
+		case constants.CANCEL_FETCHING :
 			return false
 		case constants.CHANGE_SUGGESTIONS :
 			return false
