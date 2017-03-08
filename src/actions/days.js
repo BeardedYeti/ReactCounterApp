@@ -13,10 +13,10 @@ export function addDay(game, date, coop, livestream) {
 
 // Remove Day Action
 export const removeDay = function(date) {
-	return {
-		type: constants.REMOVE_DAY,
-		payload: date
-	}
+    return {
+        type: constants.REMOVE_DAY,
+        payload: date
+    }
 }
 
 // Set Day Goal Action

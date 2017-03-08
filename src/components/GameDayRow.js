@@ -4,7 +4,7 @@ import FaGamepad from 'react-icons/lib/fa/gamepad'
 import FaTwitch from 'react-icons/lib/fa/twitch'
 
 const GameDayRow = ({game, date, coop, livestream, onRemoveDay=f=>f }) =>
-	<tr>
+	<tr onDoubleClick={() => onRemoveDay(date)}>
 		<td>
 			{date}
 		</td>

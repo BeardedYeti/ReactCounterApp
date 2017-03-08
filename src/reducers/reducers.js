@@ -24,18 +24,15 @@ export const errors = (state=[], action) => {
 
 export const allGameDays = (state=[], action) => {
 	switch(action.type) {
-		case constants.ADD_DAY :
-			const hasDay = state.some(gameDay => gameDay.date === action.payload.date)
-			return (hasDay) ? 
-				state :
-				[
-					...state,
-					gameDay(null, action)
-				]
-			// return [
-			// 	...state,
-			// 	gameDay(null, action)
-			// ]
+
+	    case constants.ADD_DAY : 
+	      const hasDay = state.some(gameDay => gameDay.date === action.payload.date)
+	      return (hasDay) ?
+	         state :
+	         [
+	           ...state,
+	           gameDay(null, action)
+	         ].sort((a, b) => new Date(b.date) - new Date(a.date))
 		case constants.REMOVE_DAY :
 			return state.filter(gameDay => gameDay.date !== action.payload)
 		default:

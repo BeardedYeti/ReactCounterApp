@@ -42,10 +42,7 @@ const GameDayList = ({ days, filter, onRemoveDay=f=>f }) => {
 				</thead>
 				<tbody>
 					{filteredDays.map((day, i) =>
-						<GameDayRow key={i} 
-									{...day}
-									onRemoveDay={onRemoveDay} 
-						/>
+						<GameDayRow key={i} {...day} onRemoveDay={onRemoveDay} />
 						)}
 				</tbody>
 			</table>
