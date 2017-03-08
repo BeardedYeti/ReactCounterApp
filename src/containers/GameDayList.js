@@ -1,4 +1,4 @@
-import GameDayList from '../component/GameDayList'
+import GameDayList from '../components/GameDayList'
 
 const sample = [
 	{

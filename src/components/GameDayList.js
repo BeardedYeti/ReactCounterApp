@@ -1,11 +1,12 @@
 import { PropTypes } from 'react'
 import { Link } from 'react-router'
-import { GameDayRow } from './GameDayRow'
+import GameDayRow from './GameDayRow'
 import FaGroup from 'react-icons/lib/fa/group'
 import FaGamepad from 'react-icons/lib/fa/gamepad'
 import FaTwitch from 'react-icons/lib/fa/twitch'
+import '../stylesheets/ui.scss'
 
-export const GameDayList = ({ days, filter, onRemoveDay=f=>f }) => {
+const GameDayList = ({ days, filter, onRemoveDay=f=>f }) => {
 	const filteredDays = (!filter || !filter.match(/coop|livestream/)) ?
 	  	days :
 	  	days.filter(day => day[filter])
@@ -61,3 +62,5 @@ GameDayList.propTypes = {
 			new Error("GameDayList must have at least one record") :
 			null
 }
+
+export default GameDayList

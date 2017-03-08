@@ -3,9 +3,10 @@ import '../stylesheets/ui.scss'
 import FaGroup from 'react-icons/lib/fa/group'
 import FaGamepad from 'react-icons/lib/fa/gamepad'
 import FaTwitch from 'react-icons/lib/fa/twitch'
+import '../stylesheets/ui.scss'
 
 
-export const GameDayCount = ({total=0, coop=0, livestream=0}) =>
+const GameDayCount = ({total=0, coop=0, livestream=0}) =>
 	<div className="game-day-count">
 		<div className="total-days">
 			<span>{total}</span>
@@ -29,3 +30,5 @@ GameDayCount.propTypes = {
   coop: PropTypes.number,
   livestream: PropTypes.number,
 }
+
+export default GameDayCount

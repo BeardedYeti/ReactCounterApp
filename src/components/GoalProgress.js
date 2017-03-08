@@ -1,4 +1,5 @@
 import { PropTypes } from 'react'
+import '../stylesheets/ui.scss'
 
 const GoalProgress = ({current, goal=10, onNewGoal=f=>f}) => {
 	let _input

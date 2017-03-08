@@ -3,7 +3,7 @@ import FaGroup from 'react-icons/lib/fa/group'
 import FaGamepad from 'react-icons/lib/fa/gamepad'
 import FaTwitch from 'react-icons/lib/fa/twitch'
 
-export const GameDayRow = ({game, date, coop, livestream, onRemoveDay=f=>f }) =>
+const GameDayRow = ({game, date, coop, livestream, onRemoveDay=f=>f }) =>
 	<tr>
 		<td>
 			{date}
@@ -27,3 +27,5 @@ GameDayRow.propTypes = {
 	livestream: PropTypes.bool,
 	onRemoveDay: PropTypes.func
 }
+
+export default GameDayRow

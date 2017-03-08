@@ -2,8 +2,9 @@ import { Link } from 'react-router'
 import FaHome from 'react-icons/lib/fa/home'
 import FaPlus from 'react-icons/lib/fa/plus'
 import FaList from 'react-icons/lib/fa/table'
+import '../stylesheets/ui.scss'
 
-export const Menu = () =>
+const Menu = () =>
 	<nav className="menu">
 		<Link to="/" activeClassName="selected">
 			<FaHome />
@@ -15,3 +16,5 @@ export const Menu = () =>
 			<FaList />
 		</Link>
 	</nav>
+
+export default Menu

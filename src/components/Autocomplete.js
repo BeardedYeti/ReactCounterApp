@@ -2,17 +2,22 @@ import { Component } from 'react'
 import FaDownload from 'react-icons/lib/fa/cloud-download'
 
 class Autocomplete extends Component {
+
 	set value(newValue) {
 		this.refs.searchTerm.value = newValue
 	}
+
 	get value() {
 		return this.refs.searchTerm.value
 	}
 
 	render() {
+
 		const { suggestions=[], onChange=f=>f, onClear=f=>f, fetching=false } = this.props
+
 		return (
 			<div className="autocomplete">
+
 				<input ref="searchTerm"
 					   type="text"
 					   placeholder="Game or Title..."
@@ -20,7 +25,9 @@ class Autocomplete extends Component {
 					   onFocus={onChange}
 					   onBlur={() => setTimeout(onClear, 250)}
 				/>
+
 				<span>{(fetching) ? <FaDownload /> : null }</span>
+
 				<div className="suggestions">
 					{suggestions.map((item, i) =>
 						<p key={i} onClick={() => {
@@ -29,9 +36,11 @@ class Autocomplete extends Component {
 						}}>{item}</p>
 					)}
 				</div>	
+
 			</div>
 		)
 	}
+	
 }
 
 export default Autocomplete

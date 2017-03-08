@@ -1,7 +1,8 @@
 import { PropTypes } from 'React'
 import FaClose from 'react-icons/lib/fa/close'
+import '../stylesheets/ui.scss'
 
-export const ShowErrors = ({ errors=[], onClearError=f=>f }) =>
+const ShowErrors = ({ errors=[], onClearError=f=>f }) =>
 	<div className="show-errors">
 		{(errors.length) ?
 			errors.map((message, i) =>
@@ -18,3 +19,5 @@ ShowErrors.propTypes = {
 	errors: PropTypes.array,
 	onClearError: PropTypes.func
 }
+
+export default ShowErrors

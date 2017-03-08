@@ -1,8 +1,9 @@
 import { PropTypes, Component } from 'react'
 import popularGames from '../../game-names.json'
 import Autocomplete from './Autocomplete'
+import '../stylesheets/ui.scss'
 
-export const AddDayForm = ({ suggestions=[], onNewDay=f=>f, onChange=f=>f, onClear=f=>f, fetching=false, router }) => {
+const AddDayForm = ({ suggestions=[], onNewDay=f=>f, onChange=f=>f, onClear=f=>f, fetching=false, router }) => {
 	
 	let _game, _date, _coop, _livestream
 
@@ -69,3 +70,5 @@ AddDayForm.propTypes = {
     onClear: PropTypes.func,
     router: PropTypes.object
 }
+
+export default AddDayForm
