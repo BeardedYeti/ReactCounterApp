@@ -74,7 +74,11 @@ export const suggestGameNames = value => dispatch => {
 	dispatch({
 		type: constants.FETCH_GAME_NAMES
 	})
-	fetch('http://localhost:3333/games/' + value)
+	const gamesURL = (process.env.NODE_ENV === 'development') ?
+		'http://localhost:8080/api/games/' :
+		'http://localhost:3000/api/games/'
+
+	fetch(gamesURL + value)
 		.then(response => response.json())
 		.then(suggestions => {
 			dispatch({

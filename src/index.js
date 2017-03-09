@@ -3,8 +3,8 @@ import { render } from 'react-dom'
 import routes from './routes'
 import { Provider } from 'react-redux'
 import constants from './constants'
-import sampleData from './initialState'
-import storeFactory from './store/store.js'
+import sampleData from './initialState.json'
+import storeFactory from './store/store'
 import { addError } from './actions/days'
 
 const initialState = (localStorage["redux-store"]) ?
