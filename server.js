@@ -6,6 +6,7 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import router from './src/api/router';
 import webpackConfig from './webpack.config.babel.js';
+import favicon from 'express-favicon';
 import { DIST_PATH } from './webpack/webpack.paths.config';
 
 mongoose.connect('mongodb://localhost:27017/activities');
@@ -15,6 +16,7 @@ const app = express()
 // General Express Middleware
 app.use(morgan('combined'));
 app.use(bodyParser());
+app.use(favicon(__dirname + '/src/assets/favicon.ico'));
 
 // Img Assets
 //app.use(express.static(path.resolve(__dirname, 'dist/assets/img')));
