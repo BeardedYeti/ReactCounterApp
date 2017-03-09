@@ -1,34 +1,69 @@
-const express = require('express')
-const games = require('./game-names.json')
-const { port=3333, delay=0 } = require('minimist')(process.argv)
-const cors = require('cors')
+import express from 'express';
+import mongoose from 'mongoose';
+import morgan from 'morgan';
+import webpack from 'webpack';
+import path from 'path';
+import bodyParser from 'body-parser';
+import router from './src/api/router';
+import webpackConfig from './webpack.config.babel.js';
+import { DIST_PATH } from './webpack/webpack.paths.config';
 
-const byName = name => game =>
-    name.toLowerCase() === game.substr(0, name.length).toLowerCase()
-
-const logger = (req, res, next) => {
-    console.log(`${req.method} request for ${req.url}`)
-    next()
-}
+mongoose.connect('mongodb://localhost:27017/activities');
 
 const app = express()
 
-app.use(logger)
+// General Express Middleware
+app.use(morgan('combined'));
+app.use(bodyParser());
 
-app.use(cors())
-app.use('/', express.static('./dist/img'))
+// Img Assets
+//app.use(express.static(path.resolve(__dirname, 'dist/assets/img')));
 
-app.get('/games', (req, res) =>
-        res.status(200).json(games)
-    )
+if (process.env.NODE_ENV === 'development') {
+    const compiler = webpack(webpackConfig);
 
-app.get('/games/:name', (req, res) =>
-        setTimeout(() =>
-                res.status(200).json(
-                    games.filter(byName(req.params.name))
-                ),
-            delay
-        )
-    )
+    // Webpack Dev Server Middleware
+    app.use(require('webpack-dev-middleware')(compiler, {
+        hot: true,
+        port: 8080,
+        inline: true,
+        host: '0.0.0.0',
+        historyApiFallback: true,
+        stats: {
+            assets: true,
+            timings: true,
+            chunks: false,
+            children: false
+        },
+        contentBase: DIST_PATH,
+        publicPath: '/',
+        proxy: {
+          '/api': {
+            target: 'http://localhost:8080',
+            secure: false
+            }
+        }
+    }));
 
-app.listen(port, () => console.log('Magic is on port ' + port + ' with a ' + delay/1000 + ' second delay'))
+    // Webpack HMR Middleware
+    app.use(require("webpack-hot-middleware")(compiler));
+
+    // Serve API for Development
+    app.use('/api', router);
+
+    // Serve Development App on 8080
+    app.listen(8080, () => {
+        console.log("Magic has spawned the API for Development on Port 8080")
+    });
+} else {
+    // Serve static bundle
+    app.use(express.static(path.resolve(__dirname, 'dist')));
+
+    // Serve API for Production
+    app.use('/api', router);
+
+    // Serve Production App on 3000
+    app.listen(3000, () => {
+        console.log('Production Server is running on port 3000')
+    });
+}
