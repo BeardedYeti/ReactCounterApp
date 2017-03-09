@@ -1,13 +1,40 @@
 import AddDayForm from '../components/AddDayForm'
 import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
+import { addDay, suggestGameNames, clearSuggestions } from '../actions/days'
 
-export default withRouter(
-	(props) =>
-		<AddDayForm suggestions={[]}
-					fetching={false}
-					router={props.router}
-					onNewDay={day => console.log('todo: add day', day)}
-					onChange={value => console.log('todo: suggest', value)}
-					onClear={() => console.log('todo: clear suggestions')} 
-		/>
-)
+const mapStateToProps = (state, props) =>
+	({
+		suggestions: state.gameNames.suggestions,
+		fetching: state.gameNames.fetching,
+		router: props.router
+	})
+
+const mapDispatchToProps = dispatch =>
+	({
+		onNewDay({ game, date, coop, livestream }) {
+			dispatch(
+				addDay(game, date, coop, livestream)
+			)
+		},
+		onChange(value) {
+			if (value) {
+				dispatch(
+					suggestGameNames(value)
+				)
+			} else {
+				dispatch(
+					clearSuggestions()
+				)
+			}
+		},
+		onClear() {
+			dispatch(
+				clearSuggestions()
+			)
+		}
+	})
+
+const Container = connect(mapStateToProps, mapDispatchToProps)(AddDayForm)
+
+export default withRouter(Container)

@@ -5,8 +5,7 @@ import { removeDay } from '../actions/days'
 const mapStateToProps = (state, props) => 
 	({
 		days: state.allGameDays,
-		filter: props.params.filter,
-
+		filter: props.params.filter
 	})
 
 const mapDispatchToProps = dispatch =>
