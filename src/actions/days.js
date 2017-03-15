@@ -11,6 +11,12 @@ export function addDay(game, date, coop, livestream) {
 	}
 }
 
+// Set Days Activity Action
+export const setDays = (data) => {
+	type: constants.SET_DAYS
+	data
+}
+
 // Remove Day Action
 export const removeDay = function(date) {
     return {
@@ -18,6 +24,8 @@ export const removeDay = function(date) {
         payload: date
     }
 }
+
+
 
 // Set Day Goal Action
 export const setGoal = (goal) => ({
@@ -67,6 +75,28 @@ export const randomGoals = () => (dispatch, getState) => {
 			})
 		}, 1500)
 	}
+}
+
+
+
+// New 
+export const fetchDay = () => dispatch => {
+	const actURL = (process.env.NODE_ENV === 'development') ?
+		'http://localhost:8080/api/activities.json/' :
+		'http://localhost:3000/api/activities.json/'
+
+
+	fetch('/api/activities.json')
+		.then(response => response.json())
+		.then(data => dispatch({
+			type: constants.SET_DAYS
+			payload: data
+		})
+		.catch(error => {
+			dispatch(
+				addError(error.message)
+			)
+		})
 }
 
 // Suggest Names

@@ -7,6 +7,9 @@ const router = Router();
 router.route('/activities.json')
 	.get(index);
 
+router.route('/activities.json');
+	.post(index);s
+
 router.route('/games')
 	.get(games);
 

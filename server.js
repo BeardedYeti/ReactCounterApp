@@ -15,7 +15,7 @@ const app = express()
 
 // General Express Middleware
 app.use(morgan('combined'));
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(favicon(__dirname + '/src/assets/favicon.ico'));
 
 // Img Assets

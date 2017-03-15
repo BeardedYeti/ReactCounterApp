@@ -19,15 +19,21 @@ const activities = [
 		"date": "2017-03-03",
 		"coop": true,
 		"livestream": false
+	},
+	{
+		"game": "Legend of Zelda: The Breath of the Wild",
+		"date": "2017-03-03",
+		"coop": true,
+		"livestream": true
 	}
 ];
 
 //Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/activities');
 
-//Go through each movie
+//Go through each activity
 activities.map(data => {
-	//Initialize a model with a movie data
+	//Initialize a model with a activity data
 	const activity = new Activity(data);
 	// Save it to DB
 	activity.save();
