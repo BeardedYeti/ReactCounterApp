@@ -4,11 +4,11 @@ import { games, gamesNames } from './controllers/games';
 
 const router = Router();
 
-router.route('/activities.json')
+router.route('/activities')
 	.get(index);
 
-router.route('/activities.json');
-	.post(index);s
+/*router.route('/activities.json')
+	.post(create);*/
 
 router.route('/games')
 	.get(games);

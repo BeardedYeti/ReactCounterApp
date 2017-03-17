@@ -9,14 +9,14 @@ const consoleMessages = store => next => action => {
 	console.groupCollapsed(`dispatching action => ${action.type}`)
 	console.log('Game Days', store.getState().allGameDays.length)
 	result = next(action)
-	let { allGameDays, goal, errors, gameNames } = store.getState() 
+	let { allGameDays, goal, errorMsgs, gameNames } = store.getState() 
 	console.log(`
 
 		game days: ${allGameDays.length}
 		goal: ${goal}
 		fetching: ${gameNames.fetching}
 		suggestions: ${gameNames.suggestions}
-		errors: ${errors.length}
+		errorMsgs: ${errorMsgs.length}
 
 	`)
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
 	return {
-		errors: state.errors
+		errorMsgs: state.errorMsgs
 	}
 }
 

@@ -20,7 +20,7 @@
 		}
 	],
 	"goal": 10,
-	"errors": [],
+	"errorMsgs": [],
 	"gameNames": {
 		"fetching": false,
 		"suggestions": [

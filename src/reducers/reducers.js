@@ -8,7 +8,7 @@ export const goal = (state=10, action) =>
 export const gameDay = (state=null, action) => 
 	(action.type === constants.ADD_DAY) ? action.payload : state
 
-export const errors = (state=[], action) => {
+export const errorMsgs = (state=[], action) => {
 	switch(action.type) {
 		case constants.ADD_ERROR : 
 			return [
@@ -67,7 +67,7 @@ export const suggestions = (state=[], action) => {
 export default combineReducers({
 	allGameDays,
 	goal,
-	errors,
+	errorMsgs,
 	gameNames: combineReducers({
 		fetching,
 		suggestions

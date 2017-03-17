@@ -25,8 +25,6 @@ export const removeDay = function(date) {
     }
 }
 
-
-
 // Set Day Goal Action
 export const setGoal = (goal) => ({
 	type: constants.SET_GOAL,
@@ -77,19 +75,15 @@ export const randomGoals = () => (dispatch, getState) => {
 	}
 }
 
-
-
 // New 
-export const fetchDay = () => dispatch => {
+/*export const fetchDays = () => dispatch => {
 	const actURL = (process.env.NODE_ENV === 'development') ?
 		'http://localhost:8080/api/activities.json/' :
 		'http://localhost:3000/api/activities.json/'
-
-
-	fetch('/api/activities.json')
+	fetch(actURL)
 		.then(response => response.json())
 		.then(data => dispatch({
-			type: constants.SET_DAYS
+			type: constants.SET_DAYS,
 			payload: data
 		})
 		.catch(error => {
@@ -97,7 +91,7 @@ export const fetchDay = () => dispatch => {
 				addError(error.message)
 			)
 		})
-}
+}*/
 
 // Suggest Names
 export const suggestGameNames = value => dispatch => {
