@@ -9,34 +9,34 @@ import storeFactory from './store/store'
 import { addError } from './actions/days'
 
 // Fetches initial data from API database
-let dbData = () => {
+
 	const actURL = (process.env.NODE_ENV === 'development') ?
 		'http://localhost:8080/api/activities/' :
 		'http://localhost:3000/api/activities/'
 	fetch(actURL)
-		.then(res => res.json())
-		.catch(error => {
-			dispatch(
-				addError(error.message)
-			)
-		})
+		.then(response => 
+			(response.status >= 400) ? 
+				console.log("Bad Response") : 
+				response.json()
+		)
+		.then((activities) => toObject(activities))
+		.then((activities) => console.log(activities))
+
+const toObject = arr => {
+  let rv = {}
+  for (let i = 0; i < arr.length; ++i)
+    rv[i] = arr[i]
+  return rv
 }
 
-const toObject = (arr) => {
-  var rv = {};
-  for (var i = 0; i < arr.length; ++i)
-    rv[i] = arr[i];
-  return rv;
-}
-
-console.log(toObject(dbData()))
-console.log(sampleData)
+console.log(dbData())
+//console.log(sampleData)
 
 // Sets initial state
 const initialState = (localStorage["redux-store"]) ?
     JSON.parse(localStorage["redux-store"]) :
     //sampleData
-    JSON.stringify(dbData())
+    
 
 const saveState = () => 
     localStorage["redux-store"] = JSON.stringify(store.getState())
